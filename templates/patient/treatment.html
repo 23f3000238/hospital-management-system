@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Treatment Details</h2>
+  <div class="card p-3">
+    <p><strong>Doctor:</strong> {{ appointment.doctor.user.name }}</p>
+    <p><strong>Date:</strong> {{ appointment.date }} <strong>Time:</strong> {{ appointment.time }}</p>
+    <hr>
+    <h5>Diagnosis</h5>
+    <p>{{ appointment.treatment.diagnosis }}</p>
+    <h5>Prescription</h5>
+    <p>{{ appointment.treatment.prescription }}</p>
+    <h5>Notes</h5>
+    <p>{{ appointment.treatment.notes }}</p>
+    <p class="text-muted"><small>Recorded at {{ appointment.treatment.created_at }}</small></p>
+  </div>
+{% endblock %}

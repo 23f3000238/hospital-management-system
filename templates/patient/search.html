@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Search Doctors</h2>
+  <form method="get" class="row g-2 mb-3">
+    <div class="col-md-5"><input class="form-control" name="specialization" placeholder="Specialization" value="{{ specialization }}"></div>
+    <div class="col-md-3"><input class="form-control" type="date" name="date" value="{{ date }}"></div>
+    <div class="col-md-2"><button class="btn btn-primary">Search</button></div>
+  </form>
+
+  <div class="list-group">
+    {% for doc in doctors %}
+      <div class="list-group-item">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h5>{{ doc.user.name }}</h5>
+            <div><strong>Specialization:</strong> {{ doc.specialization }}</div>
+            <div><strong>Availability:</strong> {{ doc.availability_text }}</div>
+          </div>
+          <div>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#book{{ doc.id }}">Book</button>
+          </div>
+        </div>
+
+        <!-- Booking modal -->
+        <div class="modal fade" id="book{{ doc.id }}" tabindex="-1">
+          <div class="modal-dialog">
+            <form method="post" action="{{ url_for('patient_book', doctor_id=doc.id) }}">
+              <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Book with {{ doc.user.name }}</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                  <div class="mb-2"><label>Date</label><input type="date" name="date" class="form-control" required></div>
+                  <div class="mb-2"><label>Time</label><input type="time" name="time" class="form-control" required></div>
+                  <div class="mb-2"><label>Notes</label><textarea name="notes" class="form-control"></textarea></div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary">Book</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    {% else %}
+      <div class="list-group-item">No doctors found.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

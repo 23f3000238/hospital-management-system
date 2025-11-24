@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Treatment for {{ appointment.patient.user.name }}</h2>
+  <p><strong>Date:</strong> {{ appointment.date }} <strong>Time:</strong> {{ appointment.time }}</p>
+  <form method="post">
+    <div class="mb-3"><label>Diagnosis</label><textarea name="diagnosis" class="form-control">{{ appointment.treatment.diagnosis if appointment.treatment }}</textarea></div>
+    <div class="mb-3"><label>Prescription</label><textarea name="prescription" class="form-control">{{ appointment.treatment.prescription if appointment.treatment }}</textarea></div>
+    <div class="mb-3"><label>Notes</label><textarea name="notes" class="form-control">{{ appointment.treatment.notes if appointment.treatment }}</textarea></div>
+    <button class="btn btn-primary">Save Treatment</button>
+  </form>
+{% endblock %}

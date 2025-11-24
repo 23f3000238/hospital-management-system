@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Doctor Dashboard</h2>
+  <p><a class="btn btn-outline-secondary" href="{{ url_for('doctor_availability') }}">Edit Availability</a></p>
+  <h4>Appointments</h4>
+  <table class="table">
+    <thead><tr><th>Date</th><th>Time</th><th>Patient</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for appt in appointments %}
+        <tr>
+          <td>{{ appt.date }}</td>
+          <td>{{ appt.time }}</td>
+          <td>{{ appt.patient.user.name }}</td>
+          <td>{{ appt.status }}</td>
+          <td>
+            <form method="post" action="{{ url_for('doctor_update_status', appt_id=appt.id) }}" style="display:inline">
+              <input type="hidden" name="status" value="Completed">
+              <button class="btn btn-sm btn-success">Mark Completed</button>
+            </form>
+            <form method="post" action="{{ url_for('doctor_update_status', appt_id=appt.id) }}" style="display:inline">
+              <input type="hidden" name="status" value="Cancelled">
+              <button class="btn btn-sm btn-warning">Cancel</button>
+            </form>
+            <a class="btn btn-sm btn-primary" href="{{ url_for('doctor_treatment', appt_id=appt.id) }}">Add/Edit Treatment</a>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5">No appointments.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

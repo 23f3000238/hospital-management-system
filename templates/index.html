@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="text-center">
+    <h1>Welcome to Simple Hospital Management System</h1>
+    <p class="lead">A beginner-friendly demo using Flask, Bootstrap, and SQLite.</p>
+    <p>
+      <a class="btn btn-primary" href="{{ url_for('register') }}">Register as Patient</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('login') }}">Login</a>
+    </p>
+  </div>
+{% endblock %}

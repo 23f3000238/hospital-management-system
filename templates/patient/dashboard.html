@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Patient Dashboard</h2>
+  <p><a class="btn btn-outline-primary" href="{{ url_for('patient_search_doctors') }}">Search Doctors</a></p>
+
+  <h4>Your Appointments</h4>
+  <table class="table">
+    <thead><tr><th>Date</th><th>Time</th><th>Doctor</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for appt in appointments %}
+        <tr>
+          <td>{{ appt.date }}</td>
+          <td>{{ appt.time }}</td>
+          <td>{{ appt.doctor.user.name }}</td>
+          <td>{{ appt.status }}</td>
+          <td>
+            {% if appt.status == 'Booked' %}
+              <form method="post" action="{{ url_for('patient_cancel', appt_id=appt.id) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Cancel</button>
+              </form>
+              <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#res{{ appt.id }}">Reschedule</button>
+              <!-- Reschedule Modal -->
+              <div class="modal fade" id="res{{ appt.id }}" tabindex="-1">
+                <div class="modal-dialog">
+                  <form method="post" action="{{ url_for('patient_reschedule', appt_id=appt.id) }}">
+                    <div class="modal-content">
+                      <div class="modal-header"><h5 class="modal-title">Reschedule</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                      <div class="modal-body">
+                        <div class="mb-2"><label>Date</label><input type="date" name="date" class="form-control" required></div>
+                        <div class="mb-2"><label>Time</label><input type="time" name="time" class="form-control" required></div>
+                      </div>
+                      <div class="modal-footer"><button class="btn btn-primary">Save</button></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            {% else %}
+              {% if appt.treatment %}
+                <a class="btn btn-sm btn-info" href="{{ url_for('patient_view_treatment', appt_id=appt.id) }}">View Treatment</a>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5">No appointments yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
