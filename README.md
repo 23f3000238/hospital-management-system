@@ -75,5 +75,3 @@ Next steps you might want to add
 - Admin: full edit forms for doctors & patients
 - Validation: stronger server-side validation and clearer error messages
 - Tests: add unit/integration tests for booking and availability logic
-
-If you want, I can add any of the above items (for example: show available slots in the search results or add edit forms for admin).
