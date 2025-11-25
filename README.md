@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Simple Hospital Management System (HMS)
 
 A beginner-friendly, minimal Hospital Management System built using:
@@ -78,6 +77,3 @@ Next steps you might want to add
 - Tests: add unit/integration tests for booking and availability logic
 
 If you want, I can add any of the above items (for example: show available slots in the search results or add edit forms for admin).
-=======
-# hospital-manage
->>>>>>> 10b648c72379cf6800b245184084b952c4ccb46c
