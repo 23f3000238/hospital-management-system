@@ -75,4 +75,3 @@ Next steps you might want to add
 - Admin: full edit forms for doctors & patients
 - Validation: stronger server-side validation and clearer error messages
 - Tests: add unit/integration tests for booking and availability logic
-
